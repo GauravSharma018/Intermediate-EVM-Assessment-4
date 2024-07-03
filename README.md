@@ -1,8 +1,8 @@
-# Intermediate-EVM-assessment-4 (Degen Gaming Token)
+# Intermediate-EVM-assessment-4 (Degen Gaming)
 This program is a simple contract written in Solidity. The smart contract creates a new ERC20 contract. Only the contract owner is able to mint tokens to a provided address and any user is able to burn and transfer and redeem the tokens they own.
 
 # Description
-DegenGamingToken is an ERC20 token smart contract with extra functionality deployed on the Avalanche network for Degen Gaming. The smart contract have the following functionality:
+DegenGaming is an ERC20 token smart contract with extra functionality deployed on the Avalanche network for Degen Gaming. The smart contract have the following functionality:
 
 1. Minting new tokens: The platform should be able to create new tokens and distribute them to players as rewards. Only the owner can mint tokens.
 2. Transferring tokens: Players should be able to transfer their tokens to others.
@@ -11,8 +11,8 @@ DegenGamingToken is an ERC20 token smart contract with extra functionality deplo
 5.  Burning tokens: Anyone should be able to burn tokens, that they own, that are no longer needed.
 
 ERC-20 Details:
-Symbol: DGT
-Name: Degen Gaming Token
+Symbol: DGN
+Name: Degen
 Decimals: 18
 
 # Getting Started
@@ -44,9 +44,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "hardhat/console.sol";
 
-contract DegenGamingToken is ERC20, Ownable, ERC20Burnable {
+contract DegenGaming is ERC20, Ownable, ERC20Burnable {
 
-    constructor() ERC20("Degen Gaming Token", "DGT") Ownable(msg.sender) {}
+    constructor() ERC20("Degen", "DGN") Ownable(msg.sender) {}
 
     // Only the owner can mint new tokens
     function mintTokens(address to, uint256 amount) public onlyOwner {
