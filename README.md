@@ -1,5 +1,4 @@
-# Intermediate-EVM-assessment-4
-Project Title - Degen Gaming Token
+# Intermediate-EVM-assessment-4 (Degen Gaming Token)
 This program is a simple contract written in Solidity. The smart contract creates a new ERC20 contract. Only the contract owner is able to mint tokens to a provided address and any user is able to burn and transfer and redeem the tokens they own.
 
 # Description
