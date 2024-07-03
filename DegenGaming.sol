@@ -15,9 +15,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "hardhat/console.sol";
 
-contract DegenGamingToken is ERC20, Ownable, ERC20Burnable {
+contract DegenGaming is ERC20, Ownable, ERC20Burnable {
 
-    constructor() ERC20("Degen Gaming Token", "DGT") Ownable(msg.sender) {}
+    constructor() ERC20("Degen", "DGN") Ownable(msg.sender) {}
 
     // Only the owner can mint new tokens
     function mintTokens(address to, uint256 amount) public onlyOwner {
