@@ -28,7 +28,7 @@ To run this program, you can use Remix, an online Solidity IDE. To get started, 
 Once you are on the Remix website, create a new file by clicking on the "+" icon in the left-hand sidebar. Save the file with a .sol extension (e.g., HelloWorld.sol). Copy and paste the code from contract.sol file into your file:
 ``` ruby
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.7;
 
  /* Your task is to create a ERC20 token and deploy it on the Avalanche network for Degen Gaming.
     The smart contract should have the following functionality:
@@ -53,11 +53,6 @@ contract DegenGaming is ERC20, Ownable, ERC20Burnable {
         _mint(to, amount); //last value is for decimals
     }
 
-    //To check the balance of a players
-    function getBalance() external view returns(uint256){
-        return this.balanceOf(msg.sender);
-    }
-
     // Players can transfer their tokens to other players
     function transferTokens(address _receiver, uint _amount) external {
         require(balanceOf(msg.sender) >= _amount, "You do not have enough Degen Tokens");
@@ -65,13 +60,13 @@ contract DegenGaming is ERC20, Ownable, ERC20Burnable {
         transferFrom(msg.sender, _receiver, _amount);
     }
 
-    // To display the items available
-    function showItems() public pure{
-        console.log("Available items(price) are: ");
-        console.log(" 1. NFT(100), 2. DegenShirts(50), 3. DegenHoodies(30), 4. DegenMasks(20), 5. DegenCaps(10)");
+    // To display the available items
+    function showItems() public pure returns(string memory){
+        string memory itemlist = "Available items(price) are: 1. NFT(100), 2. DegenShirts(50), 3. DegenHoodies(30), 4. DegenMasks(20), 5. DegenCaps(10)";
+        return itemlist;
     }
 
-    // Players can redeem tokens
+    // Players can redeem the tokens they own
         function redeemTokens(uint256 item) external {
             uint256 price;
             if (item == 1) {
@@ -86,7 +81,13 @@ contract DegenGaming is ERC20, Ownable, ERC20Burnable {
                 price = 10;
             }
         require(price <= balanceOf(msg.sender), "Error: Not Enough Degen Token");
-        _transfer(msg.sender, address(this), price);
+        _burn(msg.sender, price);
+        console.log("Congratulations! You have successfully redeemed your tokens.");
+    }
+
+    //To check the balance of a players
+    function getBalance() external view returns(uint256){
+        return this.balanceOf(msg.sender);
     }
 
     // Anyone can burn tokens they own
