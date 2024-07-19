@@ -19,6 +19,9 @@ contract DegenGaming is ERC20, Ownable, ERC20Burnable {
 
     constructor() ERC20("Degen", "DGN") Ownable(msg.sender) {}
 
+    // Mapping to store redeemed items for each player
+    mapping(address => mapping(uint256 => uint256)) public redeemedItems;
+
     // Only the owner can mint new tokens
     function mintTokens(address to, uint256 amount) public onlyOwner {
         _mint(to, amount); //last value is for decimals
@@ -50,10 +53,19 @@ contract DegenGaming is ERC20, Ownable, ERC20Burnable {
                 price = 20;
             } else if (item == 5) {
                 price = 10;
+            } else {
+                revert("Invalid item selected");
             }
+
         require(price <= balanceOf(msg.sender), "Error: Not Enough Degen Token");
+
+         // Burn the tokens
         _burn(msg.sender, price);
-        console.log("Congratulations! You have successfully redeemed your tokens.");
+
+        // Record the redeemed item
+        redeemedItems[msg.sender][item] += 1;
+
+        console.log("Congratulations! You have successfully redeemed your tokens for item", item);
     }
 
     //To check the balance of a players
